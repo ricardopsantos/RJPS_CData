@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="SampleDBTableEntity" representedClassName="SampleDBTableEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="field1" optional="YES" attributeType="String"/>
+        <attribute name="field2" optional="YES" attributeType="String"/>
+        <attribute name="field3" optional="YES" attributeType="String"/>
+        <attribute name="field4" optional="YES" attributeType="String"/>
+        <attribute name="field5" optional="YES" attributeType="String"/>
+        <attribute name="field6" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Entity" positionX="-63" positionY="27" width="128" height="43"/>
+        <element name="SampleDBTableEntity" positionX="-63" positionY="-18" width="128" height="133"/>
+    </elements>
+</model>

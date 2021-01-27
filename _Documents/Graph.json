@@ -1,0 +1,48 @@
+{
+  "targets" : {
+    "SampleApp" : {
+      "settings" : {
+        "base" : {
+          "MARKETING_VERSION" : 1
+        }
+      },
+      "type" : "application",
+      "sources" : [
+        {
+          "path" : "..\/SampleApp"
+        }
+      ],
+      "deploymentTarget" : 13,
+      "platform" : "iOS"
+    }
+  },
+  "options" : {
+    "minimumXcodeGenVersion" : "2.18.0",
+    "groupSortPosition" : "top",
+    "xcodeVersion" : "12.0.1",
+    "generateEmptyDirectories" : true,
+    "deploymentTarget" : "13.0",
+    "bundleIdPrefix" : "com.rjps.libuf",
+    "findCarthageFrameworks" : false
+  },
+  "settings" : {
+    "base" : {
+      "IPHONEOS_DEPLOYMENT_TARGET" : 13,
+      "ENABLE_BITCODE" : false,
+      "SWIFT_VERSION" : 5.2999999999999998
+    }
+  },
+  "name" : "iOSSampleApp",
+  "targetTemplates" : {
+    "Framework" : {
+      "platform" : "iOS",
+      "settings" : {
+        "base" : {
+          "MARKETING_VERSION" : "1.0.0"
+        }
+      },
+      "type" : "framework",
+      "deploymentTarget" : 13
+    }
+  }
+}
