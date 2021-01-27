@@ -24,14 +24,21 @@ class MainViewController: UIViewController {
         let cancelBag = CancelBag()
         CoreDataTesting.Assync.fetchFromDB(with: "", coreDataStore: coreDataStore).sink { (_) in } receiveValue: { (some) in print(some.count) }
         
-        let size = 50000
+        let size = 5000
         let random = EntityModel.random(size)
       
         if true {
+            
+            let chuncks = random.chunked(into: size / 8)
+            chuncks.forEach { (some) in
+                DispatchQueue.global(qos: .background).async {
+                    CoreDataTesting.Sync.save(models: some, using: coreDataStore, operationID: "Save_1")
+                }
+            }
+            
             DispatchQueue.global(qos: .background).async {
-                let chuncks = random.chunked(into: size / 8)
                 chuncks.forEach { (some) in
-                    CoreDataTesting.Sync.save(models: some, using: coreDataStore)
+                    CoreDataTesting.Sync.save(models: some, using: coreDataStore, operationID: "Save_2")
                 }
             }
         }

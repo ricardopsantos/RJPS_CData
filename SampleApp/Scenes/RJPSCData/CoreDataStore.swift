@@ -57,6 +57,8 @@ extension CoreDataSaveModelPublishing {
 
 public protocol CoreDataStoringProtocol: EntityCreating, CoreDataFetchResultsPublishing, CoreDataDeleteModelPublishing, CoreDataSaveModelPublishing {
     var viewContext: NSManagedObjectContext { get }
+    var privateQueue: NSManagedObjectContext { get }
+    var mainQueue: NSManagedObjectContext { get }
 }
 
 public class CoreDataStore: CoreDataStoringProtocol {
@@ -95,7 +97,25 @@ public class CoreDataStore: CoreDataStoringProtocol {
             }
         }
     }
-    
 }
 
+/*
+ * https://blog.nfnlabs.in/run-tasks-on-background-thread-swift-5d3aec272140
+ *
+ * NSMainQueueConcurrencyType is specifically for use with your application interface and can only be used on the main queue of an application.
+ * The NSPrivateQueueConcurrencyType configuration creates its own queue upon initialization and can be used only on that queue.
+ */
+public extension CoreDataStore {
+    var privateQueue: NSManagedObjectContext {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = self.viewContext.persistentStoreCoordinator
+        return managedObjectContext
+    }
+    
+    var mainQueue: NSManagedObjectContext {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = self.viewContext.persistentStoreCoordinator
+        return managedObjectContext
+    }
+}
 

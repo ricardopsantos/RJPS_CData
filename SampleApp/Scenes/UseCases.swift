@@ -34,23 +34,23 @@ class CoreDataTesting {
                 .store(in: cancelBag)
         }
         
-        static func save(models: [EntityModel], using coreDataStore: CoreDataStoringProtocol) {
-            let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            managedObjectContext.persistentStoreCoordinator = coreDataStore.viewContext.persistentStoreCoordinator
-            managedObjectContext.perform {
+        // https://blog.nfnlabs.in/run-tasks-on-background-thread-swift-5d3aec272140
+        static func save(models: [EntityModel], using coreDataStore: CoreDataStoringProtocol, operationID: String) {
+            let privateQueue = coreDataStore.privateQueue
+            privateQueue.perform {
                 models.forEach { (model) in
                     autoreleasepool {
                         let record = NSEntityDescription.insertNewObject(forEntityName: DBEntity.entityName,
-                                                                         into: managedObjectContext) as! DBEntity
+                                                                         into: privateQueue) as! DBEntity
                         record.field1 = model.field1
                         record.field2 = model.field2
                         do {
-                            print("Saved_B \(model.field1)")
-                            try managedObjectContext.save()
+                            print("\(operationID) \(model.field1)")
+                            try privateQueue.save()
                         } catch {
                             print("\(error)")
                         }
-                        managedObjectContext.reset()
+                        privateQueue.reset()
                     }
                 }
             }
