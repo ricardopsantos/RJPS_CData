@@ -13,3 +13,8 @@
    </a>
 </p>
 
+---
+
+# Intro
+
+Playing with [__CoreData__](https://developer.apple.com/documentation/coredata) and [__Combine__](https://developer.apple.com/documentation/combine)

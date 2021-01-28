@@ -1,13 +1,13 @@
-name: iOSSampleAppWithFramework
+name: RJPSCData
 
 # iOSSampleAppWithFramework.xcodeproj
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
-# iOSSampleAppWithFramework.xcodeproj
+# RJPSCData.xcodeproj
 
 options:
-  bundleIdPrefix: com.rjps.libuf
+  bundleIdPrefix: com.rjps.RJPSCData
   xcodeVersion: '12.0.1'
   deploymentTarget: '13.0'
   groupSortPosition: top
@@ -15,24 +15,6 @@ options:
   findCarthageFrameworks: false
   minimumXcodeGenVersion: '2.18.0'
 
-####################### PACKAGES #######################
-
-#packages:
-#  RJSLibUF:
-#    url: https://github.com/ricardopsantos/RJSLibUF
-#    #from: 1.0.0
-#    branch: develop
-
-#packages:
-#  RJPSCData:
-#    url: https://github.com/ricardopsantos/RJPS_CData
-    #from: 1.0.0
-#    branch: develop
- 
-#  TinyConstraints:
-#    url: https://github.com/roberthein/TinyConstraints
-#    branch: master
-    
 ####################### SETTINGS #######################   
     
 settings:
@@ -52,7 +34,7 @@ targetTemplates:
         
 targets:
         
-  iOSSampleAppWithFramework:
+  SampleApp:
     type: application
     platform: iOS
     deploymentTarget: 13.0

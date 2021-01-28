@@ -65,8 +65,8 @@ esac
 
 ################################################################################
 
-#printf "\n"
-#printf "\n"
+printf "\n"
+printf "\n"
 
 #echo "### Perform Xcodegen?"
 #echo " [1] : Yes"
@@ -79,27 +79,14 @@ esac
 #;;
 #esac
 
-
-echo 'Generating iOSSampleAppSPM.xcodeproj with RJPSCData installed via SPM...'
-xcodegen -s ./XcodeGen/iOSSampleAppSPM.yml -p ./
+echo 'Xcodegen...'
+echo 'Generating RJPSCData.xcodeproj for carthage install...'
+xcodegen -s ./XcodeGen/RJPSCData.yml -p ./
 echo 'Done!'
 
-echo 'Generating iOSSampleAppWithFramework.xcodeproj with RJPSCData installed via Framework...'
-xcodegen -s ./XcodeGen/iOSSampleAppWithFramework.yml -p ./
+echo 'Generating SampleApp.xcodeproj with RJPSCData installed via SPM...'
+xcodegen -s ./XcodeGen/SampleApp.yml -p ./
 echo 'Done!'
-
-
-################################################################################
-
-#echo "Opening project...."
-#open iOSSampleApp.xcodeproj
-
-################################################################################
-
-#echo "Generating graphviz...."
-#cd XcodeGen
-#xcodegen dump --spec ./iOSSampleApp.yml --type graphviz --file ../_Documents/Graph.viz
-#xcodegen dump --spec ./iOSSampleApp.yml --type json     --file ../_Documents/Graph.json
 
 ################################################################################
 

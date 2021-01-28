@@ -1,13 +1,7 @@
-name: iOSSampleAppSPM
-
-# iOSSampleApp.xcodeproj
-# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
-# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
-# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
-# iOSSampleApp.xcodeproj
+name: SampleApp
 
 options:
-  bundleIdPrefix: com.rjps.iOSSampleAppSPM
+  bundleIdPrefix: com.rjps.SampleApp
   xcodeVersion: '12.0.1'
   deploymentTarget: '13.0'
   groupSortPosition: top
@@ -17,18 +11,12 @@ options:
 
 ####################### PACKAGES #######################
 
-#packages:
-#  RJSLibUF:
-#    url: https://github.com/ricardopsantos/RJSLibUF
-#    #from: 1.0.0
-#    branch: develop
-
 packages:
   RJPSCData:
     url: https://github.com/ricardopsantos/RJPS_CData
-    #from: 1.0.0
-    #branch: develop
-    revision: "996226d2bcb1201b301581a3234a4bd797ddd29b"
+    from: 1.0.0
+    #branch: master
+    #revision: "76fc001c3a759217c5c4d44134f03a800bbe54aa"
     
 ####################### SETTINGS #######################   
     
