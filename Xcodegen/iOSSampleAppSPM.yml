@@ -27,11 +27,8 @@ packages:
   RJPSCData:
     url: https://github.com/ricardopsantos/RJPS_CData
     #from: 1.0.0
-    branch: develop
- 
-#  TinyConstraints:
-#    url: https://github.com/roberthein/TinyConstraints
-#    branch: master
+    #branch: develop
+    revision: "996226d2bcb1201b301581a3234a4bd797ddd29b"
     
 ####################### SETTINGS #######################   
     
