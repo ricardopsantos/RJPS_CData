@@ -44,8 +44,8 @@ public protocol RJPSCDataSaveModelPublishingProtocol {
     func reset()
 }
 
-extension RJPSCDataSaveModelPublishingProtocol {
-    public func publicher(save action: @escaping RJPSCDataAction) -> RJPSCDataSaveModelPublisher {
+public extension RJPSCDataSaveModelPublishingProtocol {
+    func publicher(save action: @escaping RJPSCDataAction) -> RJPSCDataSaveModelPublisher {
         return RJPSCDataSaveModelPublisher(action: action, context: viewContext)
     }
 }
