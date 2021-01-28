@@ -1,7 +1,7 @@
 import Combine
 import CoreData
 
-public struct CoreDataFetchResultsPublisher<Entity>: Publisher where Entity: NSManagedObject {
+public struct RJPSCDataFetchResultsPublisher<Entity>: Publisher where Entity: NSManagedObject {
     public typealias Output = [Entity]
     public typealias Failure = NSError
     
@@ -19,7 +19,7 @@ public struct CoreDataFetchResultsPublisher<Entity>: Publisher where Entity: NSM
     }
 }
 
-extension CoreDataFetchResultsPublisher {
+extension RJPSCDataFetchResultsPublisher {
     class Subscription<S> where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
         private var request: NSFetchRequest<Entity>
@@ -33,7 +33,7 @@ extension CoreDataFetchResultsPublisher {
     }
 }
 
-extension CoreDataFetchResultsPublisher.Subscription: Subscription {
+extension RJPSCDataFetchResultsPublisher.Subscription: Subscription {
     func request(_ demand: Subscribers.Demand) {
         var demand = demand
         guard let subscriber = subscriber, demand > 0 else { return }
@@ -47,7 +47,7 @@ extension CoreDataFetchResultsPublisher.Subscription: Subscription {
     }
 }
 
-extension CoreDataFetchResultsPublisher.Subscription: Cancellable {
+extension RJPSCDataFetchResultsPublisher.Subscription: Cancellable {
     func cancel() {
         subscriber = nil
     }

@@ -10,51 +10,45 @@ import Combine
 //import RJSLibUFStorage
 //import RJSLibUFNetworking
 //import RJSLibUFALayouts
-//import RJPSCData
+import RJPSCData
+
+let dbName = "SampleDataBase"
+let bundle = "com.rjps.libuf.iOSSampleAppWithFramework"
+
+let coreDataStore = RJPSCDataStore(name: dbName, bundle: bundle)
+let cancelBag = CancelBag()
 
 class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        let dbName = "SampleDataBase"
-        let bundle = "com.rjps.libuf.SampleApp"
-        let testing = CoreDataTesting()
-        let coreDataStore = CoreDataStore(name: dbName, bundle: bundle)
-        let cancelBag = CancelBag()
-        CoreDataTesting.Assync.fetchFromDB(with: "", coreDataStore: coreDataStore).sink { (_) in } receiveValue: { (some) in print(some.count) }
         
+        CoreDataTesting.fetchAssyncFromDB(with: "", coreDataStore: coreDataStore)
+            .sink { (_) in } receiveValue: { (some) in print("Stored records: \(some.count)") }
+            .store(in: cancelBag)
+        
+        CoreDataTesting.deleteAllRecordsSync(coreDataStore: coreDataStore, cancelBag: cancelBag)        
+
         let size = 5000
         let random = EntityModel.random(size)
       
-        if true {
-            
-            let chuncks = random.chunked(into: size / 8)
-            chuncks.forEach { (some) in
-                DispatchQueue.global(qos: .background).async {
-                    CoreDataTesting.Sync.save(models: some, using: coreDataStore, operationID: "Save_1")
-                }
-            }
-            
-            DispatchQueue.global(qos: .background).async {
-                chuncks.forEach { (some) in
-                    CoreDataTesting.Sync.save(models: some, using: coreDataStore, operationID: "Save_2")
-                }
-            }
-        }
-
-        if false {
-            DispatchQueue.global(qos: .background).async {
-                random.forEach { (random) in
-                    CoreDataTesting.Sync.save(model: random, coreDataStore: coreDataStore, cancelBag: cancelBag)
-                }
-            }
-        }
-
+        let chuncks = random.chunked(into: size / 8)
         
-
-
+        //
+        // Testing massive paralel save
+        //
+        
+        chuncks.forEach { (some) in
+            DispatchQueue.global(qos: .background).async {
+                CoreDataTesting.saveSync(models: some, using: coreDataStore, operationID: "Save_Test_1")
+            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            chuncks.forEach { (some) in
+                CoreDataTesting.saveSync(models: some, using: coreDataStore, operationID: "Save_Test_2")
+            }
+        }
     }
-
     
 }

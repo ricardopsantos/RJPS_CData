@@ -1,10 +1,10 @@
-name: iOSSampleApp
+name: iOSSampleAppWithFramework
 
-# iOSSampleApp.xcodeproj
+# iOSSampleAppWithFramework.xcodeproj
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
 # SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
-# iOSSampleApp.xcodeproj
+# iOSSampleAppWithFramework.xcodeproj
 
 options:
   bundleIdPrefix: com.rjps.libuf
@@ -52,7 +52,7 @@ targetTemplates:
         
 targets:
         
-  SampleApp:
+  iOSSampleAppWithFramework:
     type: application
     platform: iOS
     deploymentTarget: 13.0
@@ -61,31 +61,12 @@ targets:
         MARKETING_VERSION: 1.0
     sources:
        - path: ../SampleApp
-#    dependencies:
-#      - target: RJPSCData
-#        link: true
-      #- package: RJPSCData
-      #  product: RJPSCData
-        
-#      - package: RJSLibUF
-#        product: RJSLibUFBase
-#      - package: RJSLibUF
-#        product: RJSLibUFNetworking
-#      - package: RJSLibUF
-#        product: RJSLibUFAppThemes
-#      - package: RJSLibUF
-#        product: RJSLibUFALayouts
-#      - package: RJSLibUF
-#        product: RJSLibUFStorage
-#      - package: RJSLibUF
-#        product: RJSLibUFStorage
-        
-#      - package: TinyConstraints
-#        product: TinyConstraints
+    dependencies:
+      - target: RJPSCData
 
-#  RJPSCData:
-#    templates:
-#      - Framework
-#    sources:
-#      - path: ../Sources/RJPSCData
+  RJPSCData:
+    templates:
+      - Framework
+    sources:
+      - path: ../Sources/RJPSCData
 

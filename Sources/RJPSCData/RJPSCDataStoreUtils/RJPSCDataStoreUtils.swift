@@ -3,7 +3,7 @@
 import Foundation
 import CoreData
 
-public struct CoreDataStoreUtils {
+public struct RJPSCDataStoreUtils {
     private init() { }
     
     static func tryManagedObjectModelWith(dbName: String, bundle: String) -> NSManagedObjectModel? {

@@ -1,1 +1,5 @@
-digraph { }
+digraph {
+  SampleApp [shape=box]
+  RJPSCData [label=RJPSCData shape=box]
+  SampleApp -> RJPSCData [style=dashed]
+}

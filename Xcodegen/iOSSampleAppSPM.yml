@@ -1,0 +1,67 @@
+name: iOSSampleAppSPM
+
+# iOSSampleApp.xcodeproj
+# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
+# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
+# SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP | SAMPLE APP |
+# iOSSampleApp.xcodeproj
+
+options:
+  bundleIdPrefix: com.rjps.iOSSampleAppSPM
+  xcodeVersion: '12.0.1'
+  deploymentTarget: '13.0'
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  findCarthageFrameworks: false
+  minimumXcodeGenVersion: '2.18.0'
+
+####################### PACKAGES #######################
+
+#packages:
+#  RJSLibUF:
+#    url: https://github.com/ricardopsantos/RJSLibUF
+#    #from: 1.0.0
+#    branch: develop
+
+packages:
+  RJPSCData:
+    url: https://github.com/ricardopsantos/RJPS_CData
+    #from: 1.0.0
+    branch: develop
+ 
+#  TinyConstraints:
+#    url: https://github.com/roberthein/TinyConstraints
+#    branch: master
+    
+####################### SETTINGS #######################   
+    
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: 13.0
+    ENABLE_BITCODE: NO
+    SWIFT_VERSION: 5.3
+   
+targetTemplates:
+  Framework:
+    type: framework
+    platform: iOS
+    deploymentTarget: 13.0
+    settings:
+      base:
+        MARKETING_VERSION: 1.0.0
+        
+targets:
+        
+  SampleApp:
+    type: application
+    platform: iOS
+    deploymentTarget: 13.0
+    settings:
+      base:
+        MARKETING_VERSION: 1.0
+    sources:
+       - path: ../SampleApp
+    dependencies:
+      - package: RJPSCData
+        product: RJPSCData
+

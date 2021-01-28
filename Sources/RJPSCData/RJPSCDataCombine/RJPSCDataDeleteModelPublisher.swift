@@ -1,7 +1,7 @@
 import Combine
 import CoreData
 
-public struct CoreDataDeleteModelPublisher<Entity>: Publisher where Entity: NSManagedObject {
+public struct RJPSCDataDeleteModelPublisher<Entity>: Publisher where Entity: NSManagedObject {
     public typealias Output = NSBatchDeleteResult
     public typealias Failure = NSError
     
@@ -19,7 +19,7 @@ public struct CoreDataDeleteModelPublisher<Entity>: Publisher where Entity: NSMa
     }
 }
 
-extension CoreDataDeleteModelPublisher {
+extension RJPSCDataDeleteModelPublisher {
     class Subscription<S> where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
         private let request: NSFetchRequest<Entity>
@@ -33,7 +33,7 @@ extension CoreDataDeleteModelPublisher {
     }
 }
 
-extension CoreDataDeleteModelPublisher.Subscription: Subscription {
+extension RJPSCDataDeleteModelPublisher.Subscription: Subscription {
     func request(_ demand: Subscribers.Demand) {
         var demand = demand
         guard let subscriber = subscriber, demand > 0 else { return }
@@ -56,7 +56,7 @@ extension CoreDataDeleteModelPublisher.Subscription: Subscription {
     }
 }
 
-extension CoreDataDeleteModelPublisher.Subscription: Cancellable {
+extension RJPSCDataDeleteModelPublisher.Subscription: Cancellable {
     func cancel() {
         subscriber = nil
     }

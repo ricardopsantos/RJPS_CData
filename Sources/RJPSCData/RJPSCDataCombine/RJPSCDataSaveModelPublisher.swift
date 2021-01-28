@@ -1,53 +1,55 @@
 import Combine
 import CoreData
 
-public struct CoreDataFetchResultsPublisher<Entity>: Publisher where Entity: NSManagedObject {
-    public typealias Output = [Entity]
+public struct RJPSCDataSaveModelPublisher: Publisher {
+    public typealias Output = Bool
     public typealias Failure = NSError
     
-    private let request: NSFetchRequest<Entity>
+    private let action: RJPSCDataAction
     private let context: NSManagedObjectContext
     
-    init(request: NSFetchRequest<Entity>, context: NSManagedObjectContext) {
-        self.request = request
+    init(action: @escaping RJPSCDataAction, context: NSManagedObjectContext) {
+        self.action = action
         self.context = context
     }
     
     public func receive<S>(subscriber: S) where S: Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
-        let subscription = Subscription(subscriber: subscriber, context: context, request: request)
+        let subscription = Subscription(subscriber: subscriber, context: context, action: action)
         subscriber.receive(subscription: subscription)
     }
 }
 
-extension CoreDataFetchResultsPublisher {
+extension RJPSCDataSaveModelPublisher {
     class Subscription<S> where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
-        private var request: NSFetchRequest<Entity>
-        private var context: NSManagedObjectContext
+        private let action: RJPSCDataAction
+        private let context: NSManagedObjectContext
         
-        init(subscriber: S, context: NSManagedObjectContext, request: NSFetchRequest<Entity>) {
+        init(subscriber: S, context: NSManagedObjectContext, action: @escaping RJPSCDataAction) {
             self.subscriber = subscriber
             self.context = context
-            self.request = request
+            self.action = action
         }
     }
 }
 
-extension CoreDataFetchResultsPublisher.Subscription: Subscription {
+extension RJPSCDataSaveModelPublisher.Subscription: Subscription {
     func request(_ demand: Subscribers.Demand) {
         var demand = demand
         guard let subscriber = subscriber, demand > 0 else { return }
+        
         do {
+            action()
             demand -= 1
-            let items = try context.fetch(request)
-            demand += subscriber.receive(items)
+            try context.save()
+            demand += subscriber.receive(true)
         } catch {
             subscriber.receive(completion: .failure(error as NSError))
         }
     }
 }
 
-extension CoreDataFetchResultsPublisher.Subscription: Cancellable {
+extension RJPSCDataSaveModelPublisher.Subscription: Cancellable {
     func cancel() {
         subscriber = nil
     }
