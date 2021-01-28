@@ -13,7 +13,8 @@ import Combine
 import RJPSCData
 
 let dbName = "SampleDataBase"
-let bundle = "com.rjps.libuf.iOSSampleAppWithFramework"
+let bundle = Bundle.main.bundleIdentifier ?? ""
+
 
 let coreDataStore = RJPSCDataStore(name: dbName, bundle: bundle)
 let cancelBag = CancelBag()

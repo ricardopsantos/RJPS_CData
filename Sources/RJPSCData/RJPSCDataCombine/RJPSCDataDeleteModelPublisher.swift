@@ -19,7 +19,7 @@ public struct RJPSCDataDeleteModelPublisher<Entity>: Publisher where Entity: NSM
     }
 }
 
-extension RJPSCDataDeleteModelPublisher {
+public extension RJPSCDataDeleteModelPublisher {
     class Subscription<S> where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
         private let request: NSFetchRequest<Entity>
@@ -34,7 +34,7 @@ extension RJPSCDataDeleteModelPublisher {
 }
 
 extension RJPSCDataDeleteModelPublisher.Subscription: Subscription {
-    func request(_ demand: Subscribers.Demand) {
+    public func request(_ demand: Subscribers.Demand) {
         var demand = demand
         guard let subscriber = subscriber, demand > 0 else { return }
         
@@ -57,7 +57,7 @@ extension RJPSCDataDeleteModelPublisher.Subscription: Subscription {
 }
 
 extension RJPSCDataDeleteModelPublisher.Subscription: Cancellable {
-    func cancel() {
+    public func cancel() {
         subscriber = nil
     }
 }

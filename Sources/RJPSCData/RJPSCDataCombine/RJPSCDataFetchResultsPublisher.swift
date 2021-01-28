@@ -19,7 +19,7 @@ public struct RJPSCDataFetchResultsPublisher<Entity>: Publisher where Entity: NS
     }
 }
 
-extension RJPSCDataFetchResultsPublisher {
+public extension RJPSCDataFetchResultsPublisher {
     class Subscription<S> where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
         private var request: NSFetchRequest<Entity>
@@ -34,7 +34,7 @@ extension RJPSCDataFetchResultsPublisher {
 }
 
 extension RJPSCDataFetchResultsPublisher.Subscription: Subscription {
-    func request(_ demand: Subscribers.Demand) {
+    public func request(_ demand: Subscribers.Demand) {
         var demand = demand
         guard let subscriber = subscriber, demand > 0 else { return }
         do {
@@ -48,7 +48,7 @@ extension RJPSCDataFetchResultsPublisher.Subscription: Subscription {
 }
 
 extension RJPSCDataFetchResultsPublisher.Subscription: Cancellable {
-    func cancel() {
+    public func cancel() {
         subscriber = nil
     }
 }
