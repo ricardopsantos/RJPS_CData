@@ -41,7 +41,9 @@ extension RJPSCDataSaveModelPublisher.Subscription: Subscription {
         do {
             action()
             demand -= 1
-            try context.save()
+            if context.hasChanges {
+                try context.save()
+            }
             demand += subscriber.receive(true)
         } catch {
             subscriber.receive(completion: .failure(error as NSError))

@@ -38,7 +38,9 @@ class CoreDataTesting {
                     record.field2 = model.field2
                     do {
                         print("\(operationID) \(model.field1)")
-                        try privateQueue.save()
+                        if privateQueue.hasChanges {
+                            try privateQueue.save()
+                        }
                     } catch {
                         print("\(error)")
                     }
