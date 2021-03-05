@@ -3,11 +3,11 @@ import CoreData
 public extension RJSCData.FRP {
     class CDataStoreManager: RJSCDataFRPProtocol, RJSCDataSugarProtocols {
 
+        private let container: NSPersistentContainer
+
         public func newBackgroundContext() -> NSManagedObjectContext {
             container.newBackgroundContext()
         }
-
-        private let container: NSPersistentContainer
 
         public var viewContext: NSManagedObjectContext {
             container.viewContext
@@ -34,7 +34,6 @@ public extension RJSCData.FRP {
 }
 
 private extension RJS_FRPCDataStore {
-
     func setupFor(storageType: RJSCData.StorageType) {
         if storageType  == .inMemory {
             let description = NSPersistentStoreDescription()
