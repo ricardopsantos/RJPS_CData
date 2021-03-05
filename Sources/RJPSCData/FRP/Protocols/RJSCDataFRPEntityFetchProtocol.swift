@@ -12,6 +12,6 @@ public protocol RJSCDataFRPEntityFetchProtocol {
 
 extension RJSCDataFRPEntityFetchProtocol {
     public func publicher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJSCDataFRPEntityFetchPublisher<T> {
-        return RJSCDataFRPEntityFetchPublisher(request: request, context: viewContext)
+        RJSCDataFRPEntityFetchPublisher(request: request, context: viewContext)
     }
 }

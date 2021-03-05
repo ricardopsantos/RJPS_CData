@@ -13,6 +13,6 @@ public protocol RJSCDataFRPEntitySaveProtocol {
 
 public extension RJSCDataFRPEntitySaveProtocol {
     func publicher(save action: @escaping RJS_FRPCDataStorePublisherAction) -> RJSCDataFRPEntitySavePublisher {
-        return RJSCDataFRPEntitySavePublisher(action: action, context: viewContext)
+        RJSCDataFRPEntitySavePublisher(action: action, context: viewContext)
     }
 }

@@ -12,6 +12,6 @@ public protocol RJSCDataFRPEntityDeleteProtocol {
 
 extension RJSCDataFRPEntityDeleteProtocol {
     public func publicher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJSCDataFRPEntityDeletePublisher<T> {
-        return RJSCDataFRPEntityDeletePublisher(delete: request, context: viewContext)
+        RJSCDataFRPEntityDeletePublisher(delete: request, context: viewContext)
     }
 }
