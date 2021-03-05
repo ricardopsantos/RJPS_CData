@@ -5,53 +5,63 @@
 import Foundation
 import CoreData
 
-public protocol RJPSCDataEntityCreatingProtocol {
+//
+// MARK: - RJPSCDataEntityCreatingProtocol
+//
+
+public protocol RJSCDataFRPEntityCreatingProtocol {
     var viewContext: NSManagedObjectContext { get }
     func createEntity<T: NSManagedObject>() -> T
 }
 
-extension RJPSCDataEntityCreatingProtocol {
+extension RJSCDataFRPEntityCreatingProtocol {
     public func createEntity<T: NSManagedObject>() -> T {
         T(context: viewContext)
     }
 }
 
-public protocol RJPSCDataFetchResultsPublishingProtocol {
+//
+// MARK: - FRPCDataStoreFetchProtocol
+//
+
+public protocol RJSCDataFRPFetchProtocol {
     var viewContext: NSManagedObjectContext { get }
     func publicher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJPSCDataFetchResultsPublisher<T>
 }
 
-extension RJPSCDataFetchResultsPublishingProtocol {
+extension RJSCDataFRPFetchProtocol {
     public func publicher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJPSCDataFetchResultsPublisher<T> {
         return RJPSCDataFetchResultsPublisher(request: request, context: viewContext)
     }
 }
 
-public protocol RJPSCDataDeleteModelPublishingProtocol {
+//
+// MARK: - FRPCDataStoreDeleteProtocol
+//
+
+public protocol RJSCDataFRPDeleteProtocol {
     var viewContext: NSManagedObjectContext { get }
     func publicher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJPSCDataDeleteModelPublisher<T>
 }
 
-extension RJPSCDataDeleteModelPublishingProtocol {
+extension RJSCDataFRPDeleteProtocol {
     public func publicher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJPSCDataDeleteModelPublisher<T> {
         return RJPSCDataDeleteModelPublisher(delete: request, context: viewContext)
     }
 }
 
-public protocol RJPSCDataSaveModelPublishingProtocol {
+//
+// MARK: - FRPCDataStoreSaveProtocol
+//
+
+public protocol FRPCDataStoreSaveProtocol {
     var viewContext: NSManagedObjectContext { get }
     func publicher(save action: @escaping RJPSCDataAction) -> RJPSCDataSaveModelPublisher
     func reset()
 }
 
-public extension RJPSCDataSaveModelPublishingProtocol {
+public extension FRPCDataStoreSaveProtocol {
     func publicher(save action: @escaping RJPSCDataAction) -> RJPSCDataSaveModelPublisher {
         return RJPSCDataSaveModelPublisher(action: action, context: viewContext)
     }
-}
-
-public protocol RJPSCDataStoringProtocol: RJPSCDataEntityCreatingProtocol, RJPSCDataFetchResultsPublishingProtocol, RJPSCDataDeleteModelPublishingProtocol, RJPSCDataSaveModelPublishingProtocol {
-    var viewContext: NSManagedObjectContext { get }
-    var privateQueue: NSManagedObjectContext { get }
-    var mainQueue: NSManagedObjectContext { get }
 }
