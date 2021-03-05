@@ -5,24 +5,24 @@
 import Foundation
 import CoreData
 
-/**
- iOS Core Data with Sugar Syntax:
- https://medium.com/dev-genius/ios-core-data-with-sugar-syntax-ef53a0e06efe
- */
+//
+// Just use anywere hearn the protocol extension behavior
+// Inspired on : https://medium.com/dev-genius/ios-core-data-with-sugar-syntax-ef53a0e06efe
+//
 
-protocol RJPSCDataEntityDeletingProtocol {
+public protocol RJSCDataEntityDeleteSugarProtocol {
     var viewContext: NSManagedObjectContext { get }
     func delete(request: NSFetchRequest<NSFetchRequestResult>)
 }
 
-extension RJPSCDataEntityDeletingProtocol {
-    func delete(request: NSFetchRequest<NSFetchRequestResult>) {
+extension RJSCDataEntityDeleteSugarProtocol {
+    public func delete(request: NSFetchRequest<NSFetchRequestResult>) {
         do {
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
             batchDeleteRequest.resultType = .resultTypeCount
             try viewContext.execute(batchDeleteRequest)
         } catch {
-            fatalError("Couldnt delete the enities " + error.localizedDescription)
+            fatalError("Couldnt delete the entities " + error.localizedDescription)
         }
     }
 }

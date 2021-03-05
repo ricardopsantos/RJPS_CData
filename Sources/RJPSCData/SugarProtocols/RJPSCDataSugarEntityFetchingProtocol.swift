@@ -9,7 +9,12 @@ import CoreData
  iOS Core Data with Sugar Syntax:
  https://medium.com/dev-genius/ios-core-data-with-sugar-syntax-ef53a0e06efe
  */
-protocol RJPSCDataEntityFetchingProtocol {
+
+//
+// Just use anywere hearn the protocol extension behavior
+//
+
+protocol RJSCDataEntityFetchSugarProtocol {
     var viewContext: NSManagedObjectContext { get }
     func fectch<T: NSManagedObject>(predicate: NSPredicate?,
                                     sortDescriptors: [NSSortDescriptor]?,
@@ -17,7 +22,7 @@ protocol RJPSCDataEntityFetchingProtocol {
                                     batchSize: Int?) -> [T]
 }
 
-extension RJPSCDataEntityFetchingProtocol {
+extension RJSCDataEntityFetchSugarProtocol {
     func fectch<T: NSManagedObject>(predicate: NSPredicate? = nil,
                                     sortDescriptors: [NSSortDescriptor]? = nil,
                                     limit: Int? = nil,
@@ -25,15 +30,15 @@ extension RJPSCDataEntityFetchingProtocol {
         let request = NSFetchRequest<T>(entityName: T.entityName)
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
-        
+
         if let limit = limit, limit > 0 {
             request.fetchLimit = limit
         }
-        
+
         if let batchSize = batchSize, batchSize > 0 {
             request.fetchBatchSize = batchSize
         }
-        
+
         do {
             let items = try viewContext.fetch(request)
             return items

@@ -10,49 +10,35 @@ import CoreData
 // How to use NSFetchedResultsController with SwiftUI
 //
 
-class CoreDataManager {
+public extension RJSCData.NonFRP {
+    class CDataStoreManager: RJSCDataSugarProtocols {
 
-    // MARK: - Properties
-    
-    private let modelName: String
-    private let writeContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    
-    lazy var mainContext: NSManagedObjectContext = {
-        return self.storeContainer.viewContext
-    }()
-    
-    public lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: self.modelName)
-        container.loadPersistentStores { (_, error) in
-            if let error = error {
-                fatalError("Unresolved error \(error), \(error.localizedDescription)")
+        // MARK: - Properties
+
+        private let modelName: String
+        private let writeContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+
+        lazy public var viewContext: NSManagedObjectContext = {
+            return self.storeContainer.viewContext
+        }()
+
+        public lazy var storeContainer: NSPersistentContainer = {
+            let container = NSPersistentContainer(name: self.modelName)
+            container.loadPersistentStores { (_, error) in
+                if let error = error {
+                    fatalError("Unresolved error \(error), \(error.localizedDescription)")
+                }
             }
-        }
-        return container
-    }()
+            return container
+        }()
 
-    // MARK: - Initializers
-    
-    init(modelName: String) {
-        self.modelName = modelName
-        self.writeContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
-    }
-    
-    // MARK: - Public methods
-    
-    func saveContext () {
-        guard mainContext.hasChanges else { return }
-        
-        do {
-            try mainContext.save()
-        } catch let nserror as NSError {
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        // MARK: - Initializers
+
+        init(modelName: String) {
+            self.modelName = modelName
+            self.writeContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
         }
+
     }
-      
-    func newDerivedContext() -> NSManagedObjectContext {
-        let context = self.storeContainer.newBackgroundContext()
-        return context
-    }
-    
+
 }

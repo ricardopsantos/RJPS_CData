@@ -8,7 +8,10 @@
 import Foundation
 import CoreData
 
-public protocol RJSCDataFRPProtocol: RJSCDataFRPEntityCreatingProtocol, RJSCDataFRPFetchProtocol, RJSCDataFRPDeleteProtocol, FRPCDataStoreSaveProtocol {
+public protocol RJSCDataFRPProtocol: RJSCDataFRPEntityCreatingProtocol,
+                                     RJSCDataFRPEntityFetchProtocol,
+                                     RJSCDataFRPEntityDeleteProtocol,
+                                     RJSCDataFRPEntitySaveProtocol {
     var viewContext: NSManagedObjectContext { get }
     var privateQueue: NSManagedObjectContext { get }
     var mainQueue: NSManagedObjectContext { get }
