@@ -7,11 +7,11 @@ import CoreData
 
 public protocol RJSCDataFRPEntityDeleteProtocol {
     var viewContext: NSManagedObjectContext { get }
-    func publicher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJSCDataFRPEntityDeletePublisher<T>
+    func publisher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJSCDataFRPEntityDeletePublisher<T>
 }
 
 extension RJSCDataFRPEntityDeleteProtocol {
-    public func publicher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJSCDataFRPEntityDeletePublisher<T> {
+    public func publisher<T: NSManagedObject>(delete request: NSFetchRequest<T>) -> RJSCDataFRPEntityDeletePublisher<T> {
         RJSCDataFRPEntityDeletePublisher(delete: request, context: viewContext)
     }
 }

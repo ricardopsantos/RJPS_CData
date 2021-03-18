@@ -7,11 +7,11 @@ import CoreData
 
 public protocol RJSCDataFRPEntityFetchProtocol {
     var viewContext: NSManagedObjectContext { get }
-    func publicher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJSCDataFRPEntityFetchPublisher<T>
+    func publisher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJSCDataFRPEntityFetchPublisher<T>
 }
 
 extension RJSCDataFRPEntityFetchProtocol {
-    public func publicher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJSCDataFRPEntityFetchPublisher<T> {
+    public func publisher<T: NSManagedObject>(fetch request: NSFetchRequest<T>) -> RJSCDataFRPEntityFetchPublisher<T> {
         RJSCDataFRPEntityFetchPublisher(request: request, context: viewContext)
     }
 }

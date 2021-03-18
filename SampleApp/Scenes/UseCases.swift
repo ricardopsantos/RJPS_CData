@@ -20,7 +20,7 @@ class CoreDataTesting {
                                      cancelBag: CancelBag) {
         let request = NSFetchRequest<DBEntity>(entityName: DBEntity.entityName)
         coreDataStore
-            .publicher(delete: request)
+            .publisher(delete: request)
             .sink { _ in } receiveValue: { _ in
                 print("Deleting \(DBEntity.entityName) succeeded")
             }
@@ -64,7 +64,7 @@ class CoreDataTesting {
         }
 
         coreDataStore
-            .publicher(save: action)
+            .publisher(save: action)
             .sink { completion in
                 if case .failure(let error) = completion {
                     print(error.localizedDescription)
@@ -82,7 +82,7 @@ class CoreDataTesting {
            // request.predicate = NSPredicate.with(filter: filter.trim)
         }
 
-        let recordsToModel = coreDataStore.publicher(fetch: request)
+        let recordsToModel = coreDataStore.publisher(fetch: request)
             .mapError { _ in AppErrors.ok }.eraseToAnyPublisher()
             .flatMap { (list) -> FetcherListResult in
                 let mapped = list.compactMap ({ $0.toModel })
