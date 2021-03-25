@@ -13,7 +13,7 @@ let dbName = "SampleDataBase"
 let bundle = Bundle.main.bundleIdentifier ?? ""
 
 let frpCDataStore    = RJS_FRPCDataStore(name: dbName, bundle: bundle)
-let nonFRPCDataStore = RJS_NonFRPCDataStore(modelName: dbName)
+let nonFRPCDataStore = RJS_NonFRPCDataStore(modelName: dbName, bundle: bundle)
 let cancelBag = CancelBag()
 
 class MainViewController: UIViewController {

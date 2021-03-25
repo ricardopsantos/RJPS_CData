@@ -17,13 +17,14 @@ public extension RJSCData.NonFRP {
 
         private let modelName: String
         private let writeContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-
+        private let managedObjectModel: NSManagedObjectModel!
+        
         lazy public var viewContext: NSManagedObjectContext = {
             return self.storeContainer.viewContext
         }()
-
+        
         public lazy var storeContainer: NSPersistentContainer = {
-            let container = NSPersistentContainer(name: self.modelName)
+            let container = NSPersistentContainer(name: self.modelName, managedObjectModel: managedObjectModel)
             container.loadPersistentStores { (_, error) in
                 if let error = error {
                     fatalError("Unresolved error \(error), \(error.localizedDescription)")
@@ -34,10 +35,11 @@ public extension RJSCData.NonFRP {
 
         // MARK: - Initializers
 
-        public init(modelName: String) {
+        public init(modelName: String, bundle: String) {
+            self.managedObjectModel = RJPSCDataStoreUtils.tryManagedObjectModelWith(dbName: modelName, bundle: bundle)
             self.modelName = modelName
             self.writeContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
         }
-    }
 
+    }
 }
