@@ -34,11 +34,10 @@ public extension RJSCData.NonFRP {
 
         // MARK: - Initializers
 
-        init(modelName: String) {
+        public init(modelName: String) {
             self.modelName = modelName
             self.writeContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
         }
-
     }
 
 }

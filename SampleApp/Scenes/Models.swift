@@ -3,6 +3,10 @@
 //
 
 import Foundation
+import Combine
+
+typealias DBEntity = SampleDBTableEntity
+typealias FetcherListResult = AnyPublisher<[EntityModel], AppErrors>
 
 extension SampleDBTableEntity {
     var toModel: EntityModel {

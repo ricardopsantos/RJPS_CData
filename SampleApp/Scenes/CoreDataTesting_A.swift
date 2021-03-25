@@ -9,10 +9,7 @@ import Combine
 //
 import RJPSCData
 
-typealias DBEntity = SampleDBTableEntity
-typealias FetcherListResult = AnyPublisher<[EntityModel], AppErrors>
-
-class CoreDataTesting {
+class CoreDataTesting_A {
 
     let cancelBag: CancelBag = CancelBag()
 

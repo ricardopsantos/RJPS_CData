@@ -133,6 +133,7 @@ identifier_name:
 function_parameter_count: 10
 
 disabled_rules:
+    - trailing_whitespace
     - identifier_name
     - no_space_in_method_call
     - multiple_closures_with_trailing_closure

@@ -35,11 +35,9 @@ extension RJSCDataEntityFetchSugarProtocol {
             request.fetchBatchSize = batchSize
         }
 
-        do {
-            let items = try viewContext.fetch(request)
+        if let items = try? viewContext.fetch(request) {
             return items
-        } catch {
-            fatalError("Couldnt fetch the enities for \(T.entityName) " + error.localizedDescription)
         }
+        fatalError("Couldnt fetch the enities for \(T.entityName)")
     }
 }
