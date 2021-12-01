@@ -3,6 +3,10 @@
 //
 
 import Foundation
+import Combine
+
+typealias DBEntity = SampleDBTableEntity
+typealias FetcherListResult = AnyPublisher<[EntityModel], AppErrors>
 
 extension SampleDBTableEntity {
     var toModel: EntityModel {
@@ -13,12 +17,12 @@ extension SampleDBTableEntity {
 struct EntityModel {
     let field1: String
     let field2: String
-    
+
     static func random(_ count: Int) -> [EntityModel] {
         var acc: [EntityModel] = []
-        for x in 1...count {
+        for some in 1...count {
             autoreleasepool {
-                let some = EntityModel(field1: "id_\(x)",
+                let some = EntityModel(field1: "id_\(some)",
                                        field2: randomAlphaNumericString(length: 100))
                 acc.append(some)
             }
