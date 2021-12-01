@@ -5,12 +5,12 @@
 import Foundation
 import CoreData
 
-public protocol RJSCDataEntitySaveSugarProtocol {
+public protocol CDataEntitySaveSugarProtocol {
     var viewContext: NSManagedObjectContext { get }
     func saveContext ()
 }
 
-extension RJSCDataEntitySaveSugarProtocol {
+extension CDataEntitySaveSugarProtocol {
     public func saveContext () {
         guard viewContext.hasChanges else { return }
         do {

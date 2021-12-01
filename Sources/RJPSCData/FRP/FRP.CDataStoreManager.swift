@@ -1,7 +1,7 @@
 import CoreData
 
-public extension RJSCData.FRP {
-    class CDataStoreManager: RJSCDataFRPProtocol, RJSCDataSugarProtocols {
+public extension RJSCDataNameSpace.FRP {
+    class CDataStoreManager: CDataFRPComposedProtocol, CDataComposedProtocols {
 
         private let container: NSPersistentContainer
 
@@ -13,15 +13,14 @@ public extension RJSCData.FRP {
             container.viewContext
         }
 
-        public convenience init(name: String, in storageType: RJSCData.StorageType = .persistent, bundle: String) {
-
-            guard let managedObjectModel = RJPSCDataStoreUtils.tryManagedObjectModelWith(dbName: name, bundle: bundle) else {
+        public convenience init(name: String, in storageType: RJSCDataNameSpace.StorageType = .persistent, bundle: String) {
+            guard let managedObjectModel = RJSCDataNameSpace.RJPSCDataStoreUtils.tryManagedObjectModelWith(dbName: name, bundle: bundle) else {
                 fatalError("Invalid name or bundle")
             }
             self.init(name: name, in: storageType, managedObjectModel: managedObjectModel)
         }
 
-        public init(name: String, in storageType: RJSCData.StorageType = .persistent, managedObjectModel: NSManagedObjectModel) {
+        public init(name: String, in storageType: RJSCDataNameSpace.StorageType = .persistent, managedObjectModel: NSManagedObjectModel) {
             container = NSPersistentContainer(name: name, managedObjectModel: managedObjectModel)
             setupFor(storageType: storageType)
             container.loadPersistentStores { (/*storeDescription*/ _, error) in
@@ -33,8 +32,8 @@ public extension RJSCData.FRP {
     }
 }
 
-private extension RJS_FRPCDataStore {
-    func setupFor(storageType: RJSCData.StorageType) {
+private extension RJSCDataNameSpace.FRP.CDataStoreManager {
+    func setupFor(storageType: RJSCDataNameSpace.StorageType) {
         if storageType  == .inMemory {
             let description = NSPersistentStoreDescription()
             description.url = URL(fileURLWithPath: "/dev/null")

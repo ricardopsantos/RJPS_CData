@@ -5,9 +5,10 @@
 import Foundation
 import CoreData
 
-public protocol RJSCDataSugarProtocols: RJSCDataEntityDeleteSugarProtocol,
-                                        RJSCDataEntityFetchSugarProtocol,
-                                        RJSCDataEntitySaveSugarProtocol {
+public protocol CDataComposedProtocols: CDataEntityCreatingProtocol,
+                                        CDataEntityDeleteSugarProtocol,
+                                        CDataEntityFetchSugarProtocol,
+                                        CDataEntitySaveSugarProtocol {
     var privateQueue: NSManagedObjectContext { get }
     var mainQueue: NSManagedObjectContext { get }
     func reset()
@@ -20,7 +21,7 @@ public protocol RJSCDataSugarProtocols: RJSCDataEntityDeleteSugarProtocol,
  * The NSPrivateQueueConcurrencyType configuration creates its own queue upon initialization and can be used only on that queue.
  */
 
-extension RJSCDataSugarProtocols {
+extension CDataComposedProtocols {
     public var privateQueue: NSManagedObjectContext {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = viewContext.persistentStoreCoordinator
@@ -34,7 +35,7 @@ extension RJSCDataSugarProtocols {
     }
 }
 
-extension RJSCDataSugarProtocols {
+extension CDataComposedProtocols {
     public func reset() {
         viewContext.reset()
     }

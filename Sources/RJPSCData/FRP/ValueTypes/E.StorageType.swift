@@ -4,7 +4,7 @@
 
 import Foundation
 
-public extension RJSCData {
+public extension RJSCDataNameSpace {
      enum StorageType {
         case persistent, inMemory
     }

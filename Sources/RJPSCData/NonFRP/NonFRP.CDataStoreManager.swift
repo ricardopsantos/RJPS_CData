@@ -10,12 +10,12 @@ import CoreData
 // How to use NSFetchedResultsController with SwiftUI
 //
 
-public extension RJSCData.NonFRP {
-    class CDataStoreManager: RJSCDataSugarProtocols {
+public extension RJSCDataNameSpace.NonFRP {
+    class CDataStoreManager: CDataComposedProtocols {
 
         // MARK: - Properties
 
-        private let modelName: String
+        private let name: String
         private let writeContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         private let managedObjectModel: NSManagedObjectModel!
         
@@ -24,7 +24,7 @@ public extension RJSCData.NonFRP {
         }()
         
         public lazy var storeContainer: NSPersistentContainer = {
-            let container = NSPersistentContainer(name: self.modelName, managedObjectModel: managedObjectModel)
+            let container = NSPersistentContainer(name: name, managedObjectModel: managedObjectModel)
             container.loadPersistentStores { (_, error) in
                 if let error = error {
                     fatalError("Unresolved error \(error), \(error.localizedDescription)")
@@ -35,11 +35,12 @@ public extension RJSCData.NonFRP {
 
         // MARK: - Initializers
 
-        public init(modelName: String, bundle: String) {
-            self.managedObjectModel = RJPSCDataStoreUtils.tryManagedObjectModelWith(dbName: modelName, bundle: bundle)
-            self.modelName = modelName
+        public init(name: String, bundle: String) {
+            self.managedObjectModel = RJSCDataNameSpace.RJPSCDataStoreUtils.tryManagedObjectModelWith(dbName: name, bundle: bundle)
+            self.name = name
             self.writeContext.persistentStoreCoordinator = storeContainer.persistentStoreCoordinator
         }
 
     }
+
 }

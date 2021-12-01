@@ -10,12 +10,12 @@ import CoreData
 // Inspired on : https://medium.com/dev-genius/ios-core-data-with-sugar-syntax-ef53a0e06efe
 //
 
-public protocol RJSCDataEntityDeleteSugarProtocol {
+public protocol CDataEntityDeleteSugarProtocol {
     var viewContext: NSManagedObjectContext { get }
     func delete(request: NSFetchRequest<NSFetchRequestResult>)
 }
 
-extension RJSCDataEntityDeleteSugarProtocol {
+extension CDataEntityDeleteSugarProtocol {
     public func delete(request: NSFetchRequest<NSFetchRequestResult>) {
         do {
             let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)

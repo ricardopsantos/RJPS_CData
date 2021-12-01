@@ -12,8 +12,8 @@ import RJPSCData
 let dbName = "SampleDataBase"
 let bundle = Bundle.main.bundleIdentifier ?? ""
 
-let frpCDataStore    = RJS_FRPCDataStore(name: dbName, bundle: bundle)
-let nonFRPCDataStore = RJS_NonFRPCDataStore(modelName: dbName, bundle: bundle)
+let frpCDataStore    = RJSCDataNameSpace.FRP.CDataStoreManager(name: dbName, bundle: bundle)
+let nonFRPCDataStore = RJSCDataNameSpace.NonFRP.CDataStoreManager(name: dbName, bundle: bundle)
 let cancelBag = CancelBag()
 
 class MainViewController: UIViewController {
@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
             let allRecordsV1 = try nonFRPCDataStore.privateQueue.fetch(request)
             let allRecordsV2 = try nonFRPCDataStore.mainQueue.fetch(request)
             let allRecordsV3 = try nonFRPCDataStore.viewContext.fetch(request)
-            let allRecordsV4: [DBEntity] = try nonFRPCDataStore.fectch()
+            let allRecordsV4: [DBEntity] = try nonFRPCDataStore.fetch()
             print("Fetched \(allRecordsV1.count) records")
             print("Fetched \(allRecordsV2.count) records")
             print("Fetched \(allRecordsV3.count) records")

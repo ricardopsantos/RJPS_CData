@@ -4,4 +4,4 @@
 
 import Foundation
 
-public typealias RJS_FRPCDataStorePublisherAction = (() -> Void)
+public typealias FRPCDataStorePublisherAction = (() -> Void)

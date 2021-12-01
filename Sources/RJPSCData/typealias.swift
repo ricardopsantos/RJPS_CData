@@ -1,25 +1,26 @@
 import Foundation
 
-public struct RJSCData {
+public struct RJSCDataNameSpace {
     private init() { }
-    public struct FRP { private init() { } }
-    public struct NonFRP { private init() { } }
+    public struct FRP { private init() { } }    // Function Reactive Programing (FRP) Version
+    public struct NonFRP { private init() { } } // NON Function Reactive Programing (FRP) Version
 }
 
 //
 // NON Function Reactive Programing (FRP) Version
 //
 
-public typealias RJS_NonFRPCDataStore = RJSCData.NonFRP.CDataStoreManager
+public typealias RJS_NonFRPCDataStore = RJSCDataNameSpace.NonFRP.CDataStoreManager
 
 //
 // Function Reactive Programing (FRP) Version
 //
 
-public typealias RJS_FRPCDataStore         = RJSCData.FRP.CDataStoreManager
-public typealias RJS_FRPCDataStoreProtocol = RJSCDataFRPProtocol // Composition of Create, Fetch, Delete and Save Protocols
+public typealias RJS_FRPCDataStore = RJSCDataNameSpace.FRP.CDataStoreManager
 
 //
-// Sugar protocol extensions
+// Protocols
+//
 
-public typealias RJS_CoreDataSugarProtocol = RJSCDataSugarProtocols
+public typealias RJS_FRPCDataStoreProtocol  = CDataFRPComposedProtocol // Composition of Create, Fetch, Delete and Save Protocols
+public typealias RJS_CDataComposedProtocols = CDataComposedProtocols   // Composition of Create, Fetch, Delete and Save Protocols

@@ -54,7 +54,7 @@ class CoreDataTesting_A {
                          coreDataStore: RJS_FRPCDataStoreProtocol,
                          cancelBag: CancelBag) {
 
-        let action: RJS_FRPCDataStorePublisherAction = {
+        let action: FRPCDataStorePublisherAction = {
             let record: DBEntity = coreDataStore.createEntity()
             record.field1 = model.field1
             record.field2 = model.field2
