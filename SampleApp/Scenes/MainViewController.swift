@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
             let allRecordsV1 = try nonFRPCDataStore.privateQueue.fetch(request)
             let allRecordsV2 = try nonFRPCDataStore.mainQueue.fetch(request)
             let allRecordsV3 = try nonFRPCDataStore.viewContext.fetch(request)
-            let allRecordsV4: [DBEntity] = try nonFRPCDataStore.fetch()
+            let allRecordsV4: [DBEntity] = nonFRPCDataStore.fetch()
             print("Fetched \(allRecordsV1.count) records")
             print("Fetched \(allRecordsV2.count) records")
             print("Fetched \(allRecordsV3.count) records")
